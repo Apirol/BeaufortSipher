@@ -1,20 +1,16 @@
-from KeyCreation import keyCreation
 from InputHandler import openFileAndReadData
-from PrepareTextHandler import PrepareText
+from InputHandler import PrepareText
 from OuputHandler import writeDataToFile
-from SimpleReplacementCipher import encryptText
+from BoforSipher import BoforSipherEncrypt
+from BoforSipher import BoforSipherDecrypt
+from BoforSipher import InitKey
 
 
 if __name__ == '__main__':
-    keyForEssay = keyCreation()
-    writeDataToFile(str(keyForEssay), 'keyForEssay.txt')
-    keyForText = keyCreation()
-    writeDataToFile(str(keyForText), 'keyForText.txt')
-    defaultEssay = openFileAndReadData('Data/Essay.txt')
-    preparedEssay = PrepareText(defaultEssay)
-    defaultText = openFileAndReadData('Data/Text.txt')
-    preparedText = PrepareText(defaultText)
-    encryptedEssay = encryptText(preparedEssay, keyForEssay)
-    encryptedText = encryptText(preparedText, keyForText)
-    writeDataToFile(encryptedEssay, 'Data/encryptedEssay.txt')
-    writeDataToFile(encryptedText, 'Data/encryptedText.txt')
+    textToEncrypt = PrepareText(openFileAndReadData("Data/Text.txt"))
+    initialKey = openFileAndReadData("Data/keyForText.txt")
+    key = InitKey(textToEncrypt, initialKey)
+    encryptedText = BoforSipherEncrypt(textToEncrypt, key)
+    decryptedText = BoforSipherDecrypt(encryptedText, key)
+    writeDataToFile(encryptedText, "Data/EncryptedText.txt")
+    writeDataToFile(encryptedText, "Data/DecryptedText.txt")
