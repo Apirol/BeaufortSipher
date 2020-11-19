@@ -13,4 +13,4 @@ if __name__ == '__main__':
     encryptedText = BoforSipherEncrypt(textToEncrypt, key)
     decryptedText = BoforSipherDecrypt(encryptedText, key)
     writeDataToFile(encryptedText, "Data/EncryptedText.txt")
-    writeDataToFile(encryptedText, "Data/DecryptedText.txt")
+    writeDataToFile(decryptedText, "Data/DecryptedText.txt")
